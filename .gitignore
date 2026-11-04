@@ -50,3 +50,5 @@ po/*~
 rsconnect/
 
 data/raw/
+
+data/new_orleans/reviews_new_orleans.rds
