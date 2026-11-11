@@ -263,4 +263,4 @@ ggsave("figures/tract_map.png", p_tract, width = 8, height = 6, dpi = 150)
   restaurants inside the busiest dining district. Several ZCTAs have very few
   restaurants (70129 has only 2), so their average ratings are not reliable.
 - **What tracts would show.** Tracts give finer detail but spread the
-  restaurants too thin for reliable comparison.
+  restaurants too thin for reliable  
