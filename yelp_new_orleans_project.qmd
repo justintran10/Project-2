@@ -497,7 +497,7 @@ similar raw averages can still differ by several tenths of a point in adjusted
 score, which is why rankings in the middle of the list change a lot even though
 the top stays similar.
 
-## Which restaurants change rank the most?
+## Which restaurants change rank the most? 
 
 ```{r}
 baseline_by_restaurant <- eligible_adjusted_reviews |>
@@ -523,10 +523,15 @@ by fairly generous reviewers (average baselines of 4.04, 4.12, and 4.06) who
 also rated them below their own usual scores. Mat & Naddie's, Rio Mar, and New
 Orleans Hamburger & Seafood Co. rose 122 to 146 places and are rated by tougher
 reviewers (baselines of 3.90, 3.83, and 3.86). A 4.3 from a generous reviewer
-says less than a 4.0 from a tough one. (FILL IN after looking at the table
-above: whether the same pattern holds for the other movers, and whether the
-`eligible_minus_all` column shows restaurants whose eligible reviewers differ
-from everyone else.) The rank changes also overstate how different the scores
+says less than a 4.0 from a tough one. The other four large movers show a different mechanism. Gautreau's and La
+Crepe Nanou rose 116 and 118 places, and Ruby Slipper Cafe (one of its two
+locations) and The Governor fell 117 and 119, but the average baseline of
+their reviewers is close to the same for all four (3.86 to 4.02). What
+differs is that the reviewers with at least five reviews rated the risers
+0.18 to 0.20 stars higher than all reviewers did, and rated the fallers 0.28
+to 0.30 stars lower. These moves therefore reflect disagreement between
+frequent reviewers and the general crowd as much as reviewer-level
+normalization. The rank changes also overstate how different the scores
 are, because many restaurants sit close to 0 and small score differences shift
 many ranks.
 
