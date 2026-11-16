@@ -329,7 +329,7 @@ knitr::kable(zcta_summary)
 | 70131 |             5 |               4.00 |
 | 70129 |             2 |               4.25 |
 
-### Maps
+### Maps 
 
 ``` r
 city_outline <- louisiana_places |> filter(NAME == "New Orleans")
