@@ -6,7 +6,7 @@ them?
 
 **[View the complete report](yelp_new_orleans_project.md)**
 
-## Executive summary 
+## Executive summary  
 
 I analyzed 656 seafood and Louisiana-cooking restaurants inside the official
 New Orleans boundary, using 249,002 Yelp reviews from 138,367 reviewers.
