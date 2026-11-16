@@ -251,7 +251,7 @@ ggsave("figures/tract_map.png", p_tract, width = 8, height = 6, dpi = 150)
 - **What tracts would show.** Tracts give finer detail but spread the
   restaurants too thin for reliable comparison.
   
-## Step 7: All reviewers vs. reviewer-adjusted ratings
+## Step 7: All reviewers vs. reviewer-adjusted ratings 
 
 This step uses the 656 restaurants inside the official New Orleans boundary. The
 reviews are individual star ratings (`stars` in the review table, not the
@@ -417,6 +417,7 @@ top10 <- ranked |> slice_head(n = 10) |>
   select(business_id, business_name, rank_adjusted)
 
 top10_pts <- new_orleans_map_data |>
+  select(business_id) |>
   inner_join(top10, by = "business_id") |>
   st_transform(st_crs(zctas))
 
@@ -515,25 +516,7 @@ ranked |>
   knitr::kable(digits = 2)
 ```
 
-Every restaurant in this list has at least 37 eligible reviews, so small
-samples are a weaker explanation here than for the lower cutoffs. Several
-movers fit a reviewer-behavior explanation. Gallier Restaurant & Oyster Bar,
-Marjie's Grill, and Corporation Bar & Grill fell 129 to 193 places and are rated
-by fairly generous reviewers (average baselines of 4.04, 4.12, and 4.06) who
-also rated them below their own usual scores. Mat & Naddie's, Rio Mar, and New
-Orleans Hamburger & Seafood Co. rose 122 to 146 places and are rated by tougher
-reviewers (baselines of 3.90, 3.83, and 3.86). A 4.3 from a generous reviewer
-says less than a 4.0 from a tough one. The other four large movers show a different mechanism. Gautreau's and La
-Crepe Nanou rose 116 and 118 places, and Ruby Slipper Cafe (one of its two
-locations) and The Governor fell 117 and 119, but the average baseline of
-their reviewers is close to the same for all four (3.86 to 4.02). What
-differs is that the reviewers with at least five reviews rated the risers
-0.18 to 0.20 stars higher than all reviewers did, and rated the fallers 0.28
-to 0.30 stars lower. These moves therefore reflect disagreement between
-frequent reviewers and the general crowd as much as reviewer-level
-normalization. The rank changes also overstate how different the scores
-are, because many restaurants sit close to 0 and small score differences shift
-many ranks.
+Every restaurant in this list has at least 37 eligible reviews, so small samples are a weaker explanation here than for the lower cutoffs. Several movers fit a reviewer-behavior explanation. Gallier Restaurant & Oyster Bar, Marjie's Grill, and Corporation Bar & Grill fell 129 to 193 places and are rated by fairly generous reviewers (average baselines of 4.04, 4.12, and 4.06) who also rated them below their own usual scores. Mat & Naddie's, Rio Mar, and New Orleans Hamburger & Seafood Co. rose 122 to 146 places and are rated by tougher reviewers (baselines of 3.90, 3.83, and 3.86). A 4.3 from a generous reviewer says less than a 4.0 from a tough one. The other four large movers show a different  mechanism. Gautreau's and La Crepe Nanou rose 116 and 118 places, and Ruby Slipper Cafe (one of its two locations) and The Governor fell 117 and 119, but the average baseline of their reviewers is close to the same for all four (3.86 to 4.02). What differs is that the reviewers with at least five reviews rated the risers 0.18 to 0.20 stars higher than all reviewers did, and rated the fallers 0.28 to 0.30 stars lower. These moves therefore reflect disagreement between frequent reviewers and the general crowd as much as reviewer-level normalization. The rank changes also overstate how different the scores are, because many restaurants sit close to 0 and small score differences shift many ranks.
 
 ## Limitations
 
