@@ -83,7 +83,7 @@ restaurant_categories <- new_orleans_restaurants |>
 
 selected_categories <- c("seafood", "cajun/creole", "southern", "soul food")
 
-cand <- restaurant_categories |> filter(category %in% selected_categories)
+cand <- restaurant_categories |> filter(category %in% selected_categories) 
 
 cand |> count(category, sort = TRUE)
 n_distinct(cand$business_id)
