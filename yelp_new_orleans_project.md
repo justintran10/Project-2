@@ -10,11 +10,63 @@ options(tigris_use_cache = TRUE)
 dir.create("figures", showWarnings = FALSE)
 ```
 
-## Research question and area choice
+## Research question
 
-**Question:** Where in New Orleans can someone find the best seafood and
-Louisiana-style restaurants, and which geographic area is best for
-comparing them?
+**Where in New Orleans can someone find the best seafood and
+Louisiana-style restaurants, and which ZIP code area is best for finding
+them?**
+
+## Executive summary
+
+I analyzed 656 seafood and Louisiana-cooking restaurants inside the
+official New Orleans boundary, using 249,002 Yelp reviews from 138,367
+reviewers. Because some reviewers rate everything highly and others
+rarely do, I ranked restaurants by how much reviewers rated them above
+or below their own usual scores, using only restaurants with at least 30
+reviews from frequent reviewers (345 of 656). The top 10 come from eight
+different ZIP code areas, and ZIP code area 70119 has the most (three).
+I chose ZIP code areas over census tracts because tracts split the
+restaurants too finely to compare.
+
+### Top 10 restaurants (reviewer-adjusted)
+
+1.  Tito’s Ceviche & Pisco
+2.  Avery’s On Tulane
+3.  Meauxbar
+4.  Restaurant August
+5.  Fiorella’s the Original
+6.  Brigtsen’s Restaurant
+7.  Sweet Soulfood
+8.  Heard Dat Kitchen
+9.  Castnet Seafood
+10. Gabrielle Restaurant
+
+The full table with ZIP code areas and a map are in the Step 7 section
+below. The scores are close together (ranks 8 to 10 differ by about
+0.01), so the list is best read as a group, not a strict order.
+
+### Main findings
+
+1.  **The best-rated places are spread across the city, not concentrated
+    in one area.** The top 10 fall in eight ZIP code areas (70119 has
+    three; the others have one each). ZIP code area 70130 holds 213 of
+    the 656 restaurants (32%) but only one of the top 10.
+
+2.  **The top 10 depends on how much evidence you require.** If a
+    restaurant needs only 5 reviews from frequent reviewers, none of the
+    top 10 at the 30-review standard appear in the list. Restaurants
+    with few reviews can reach the top on a handful of generous ratings,
+    so I required at least 30.
+
+3.  **Adjusting for reviewer habits mostly keeps the same ordering but
+    moves the middle of the list a lot.** Raw average stars and the
+    adjusted score are strongly correlated (r = 0.91). Even so, some
+    restaurants move more than 100 places, partly because reviewers
+    disagree with the general crowd and partly because so many
+    restaurants have similar scores.
+
+The adjusted score is not a new Yelp rating. It measures whether
+reviewers rated a restaurant higher or lower than they usually do.
 
 **Area I am picking: ZIP code areas (ZCTAs).** I compared ZCTAs with
 census tracts. ZCTAs divide the 656 New Orleans restaurants into 17
