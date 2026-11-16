@@ -1,0 +1,89 @@
+# AI Prompt Log: Project 2 (Yelp New Orleans)
+
+## How I used AI
+I used Claude throughout this project. It drafted most of the R code I ran
+(the chunked review import, the spatial joins, the reviewer normalization, the
+plots) and drafted text for the report and README. I ran every step myself,
+checked the output against my data, made the choices about the category theme,
+the geographic system, and the cutoffs (with its recommendations), and edited
+the text. The entries below are the exchanges where I tested its work or it
+had to change.
+
+## 1. Reading the 5.3 GB review file
+**Asked:** How to load the review file, since the assignment's plain
+`stream_in()` call might exhaust memory.
+**AI gave:** A chunked version that keeps only reviews for my 2,259
+restaurants, and a test on the first 100,000 lines first.
+**What I did:** Ran the test (8,358 matches, expected columns), then the full
+run (6,990,280 records scanned, 476,421 kept). Checked that every kept review
+belongs to one of my restaurants, that no columns had missing values, and that
+the saved file read back with the same row count.
+
+## 2. File size: the AI corrected itself
+**Asked:** Reported the saved review file size (112 MB), then shared a
+screenshot of my Console.
+**AI gave:** First said 112 MB was the `xz` size. My screenshot showed I had
+saved with `xz` and then overwritten the same file with `gzip`, so it
+corrected itself: 112 MB was the gzip size.
+**What I did:** Kept the full file out of Git (over GitHub's 100 MB limit) and
+committed a version without the review text (7.9 MB, same 476,421 reviews).
+
+## 3. Category group
+**Asked:** Which related categories to use, after pasting the top 40 counts.
+**AI gave:** Candidate themes, a warning that generic labels like "food" and
+"bars" are too broad, and a search for related labels I might have missed.
+**What I did:** Chose seafood and Louisiana cooking. The search found "seafood
+markets" and "fish & chips"; I checked they would add only 3 new restaurants
+and left them out. Ran pair counts (cajun/creole with seafood: 156 restaurants)
+and the distribution of how many of the four categories each restaurant has.
+
+## 4. The AI's wrong guess about ZIP 70130
+**Asked:** For help writing up my choice of ZIP code areas.
+**AI gave:** Before writing, it said its earlier description of 70130 as "large"
+and "the French Quarter" might be wrong, and searched. The sources conflicted
+and several were clearly unreliable. The credible ones put 70130 at about 2.6
+square miles, so it is small and dense.
+**What I did:** Changed the argument from "ZIP too large" to "one small ZIP
+holds 32% of the restaurants," and did not name neighborhoods in the report
+because I could not verify them.
+
+## 5. The ranking cutoff changed after I tested it
+**Asked:** What minimum number of reviews to require before ranking.
+**AI gave:** First suggested 20. I ran a sensitivity check: the top 10 at a
+minimum of 5 shared 0 restaurants with the one at 20, and 7 with the one at 30.
+At 5, every top-10 restaurant had only 6 to 16 eligible reviews. The AI
+revised its recommendation to 30.
+**What I did:** Used 30 (345 of 656 restaurants) and report that the top 10
+depends on the cutoff.
+
+## 6. Explaining rank changes: the first explanation was incomplete
+**Asked:** Why some restaurants move more than 100 places after adjustment.
+**AI gave:** An explanation based on reviewer baselines (generous versus tough
+reviewers). When I printed the baseline and the gap between eligible and all
+reviewers for four of the movers, the baselines were about the same (3.86 to
+4.02), and the gap was the driver, so the text was rewritten. I also found
+Ruby Slipper Cafe was listed twice because it has two locations.
+**What I did:** Rewrote that paragraph. (Add: what you found for the other six.)
+
+## 7. A render failure caused by the AI's code
+**Asked:** Pasted "Execution halted" and the error.
+**AI gave:** The error came from code it wrote: joining two tables that both
+had `business_name` renamed the column, so a later `select()` failed. The
+earlier render had also failed, which is why Step 7 was missing from the
+report on GitHub.
+**What I did:** Applied the fix, rendered again, checked that Step 7 and all
+four figures were present, and viewed the page on GitHub.
+
+## 8. Date parsing
+**Asked:** Pasted a warning that `ymd(date)` failed and a count showing all
+249,002 dates were NA.
+**AI gave:** A request to look at the column first. It held text like
+"2017-01-14 20:54:15", so `ymd_hms()` was needed. (Dates are not used in the
+final ratings analysis.)
+
+## Where the AI was wrong
+- It said 112 MB was an `xz` file size; it was the gzip size.
+- It guessed ZIP 70130 was the French Quarter and large; it is small and dense.
+- It first recommended a 20-review cutoff, before the sensitivity check.
+- Its first explanation of the rank movers used only reviewer baselines.
+- Its top-10 table code had a column-name clash that broke the render.
